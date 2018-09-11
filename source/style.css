@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    padding: 5px;
+    background-color:#333;
+    text-align: center;
+    color: white;
+}
+
+.tab-and-description-container {
+    display: flex;
+    flex-flow: row;
+}
+
+
+.hover-tabs {
+    flex-grow:1;
+    background-color: #f1f1f1;
+}
+
+.description {
+    flex-grow: 3;
+    padding: 20px;
+    background-color:white;
+}
+
+footer {
+    padding: 10px;
+    background: #ddd;
+}
