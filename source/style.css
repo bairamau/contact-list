@@ -18,7 +18,7 @@ label {
     display: inline-block;
 }
 
-.tab-and-description-container {
+.columns-container {
     height: calc(100vh - 36.6px);
     display: flex;
     flex-flow: row;
@@ -34,7 +34,7 @@ ul.click-tabs {
     overflow: auto;
 }
 
-li.tab {
+ul li.tab {
     padding: 20px;
     position:relative;
 }
@@ -54,28 +54,29 @@ ul li.active {
 }
 
 
-
 #tab-content {
+    font-size: 1.2em;
     display:flex;
     flex-flow: column;
-    justify-content: space-around;
-    align-items:stretch;
-    flex: 70%;
-    padding: 20px;
+    justify-content: space-around; 
+    flex: 60%;
+    padding: 40px 20px 40px 20px;
     background-color:white;
+    overflow: auto;
 }
 
-
-footer {
-    background: #ddd;
+#controls {
+    display:flex;
+    flex:10%;
+    flex-flow:column;
+    justify-content: space-around;
+    align-items:center;
 }
-
-
 
 input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 5px;
     box-sizing:border-box;
 }
@@ -88,7 +89,6 @@ input:focus {
 button {
     background-color: dodgerblue;
     color: white;
-    padding: 15px 20px;
     border: none;
     cursor: pointer;
     opacity: 0.8;
@@ -100,16 +100,14 @@ button:hover{
 button.submit-button {
     width:100%;
     margin-top: 20px;
+    padding: 15px 20px;
 }
 
-button#open-modal {
-    position:fixed;
-    bottom:25px;
-    right:25px;
+.control-button {
     border-radius: 50%;
     width:70px;
     height:70px;
-    font-size:40px;
+    font-size:50px;
     text-align: center;
 }
 
@@ -148,26 +146,31 @@ button#open-modal {
     cursor: pointer;
 }
 
-.delete {
-    color:white;
-    display: none;
-    position:absolute;
-    top:0px;
-    right:0px;
-    padding:20px;
+.name {
+    display:inline-block;
+    font-weight:bold;
+    min-width:30%;
 }
 
-.delete:hover {
-    background-color:#f44336;
+.value {
+    display:inline-block;
+}
+
+.name-value-container:nth-child(even) {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
 }
 
 @media all and (max-width:700px) {
-    .tab-and-description-container {
+    .columns-container {
         height: auto;    
         flex-direction: column;
     }
     .modal-content {
         width:80%;
+    }
+    #controls{
+        flex-direction:row;
     }
 }
 
@@ -179,5 +182,3 @@ button#open-modal {
     from {transform: scale(0)} 
     to {transform: scale(1)}
 }
-
-
