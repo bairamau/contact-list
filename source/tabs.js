@@ -2,9 +2,20 @@ document.addEventListener('click', function (event) {
     if (event.target.classList.contains('tab')) {
         openTab(event.target);
     }
+    else if (event.target.classList.contains('delete')){
+        deleteContact(event.target.parentNode.getAttribute('id'));
+    }
 }, false);
 
 function openTab(target) {
+    var tabs = document.getElementsByClassName("tab");
+    for (i = 0; i < tabs.length; i++) {
+        tabs[i].className = tabs[i].className.replace(" active", "");
+        tabs[i].querySelector('.delete').style.display = 'none';
+    }
+    var delButton = target.querySelector('.delete');
+    delButton.style.display = ' inline';
+    target.className += ' active';
     var targetId = target.getAttribute('id');
     for (let person of contacts) {
 
