@@ -20,25 +20,14 @@ function addContact(contact) {
     li.setAttribute('id', contact.id);
     li.setAttribute('class', 'tab');
     parent.appendChild(li);
-    addDeleteButton(li);
 }
 
-function addDeleteButton(li) {
-    var span = document.createElement("span");
-    var txt = document.createTextNode("×");
-    span.className = "delete";
-    //span.title = "Delete contact";
-    span.appendChild(txt);
-    li.appendChild(span);
-
-}
-
-function deleteContact(identificator) {
-    properties = document.querySelectorAll('p span');
-    for(property of properties){
+function deleteCurrentContact() {
+    properties = document.querySelectorAll('.value');
+    for (property of properties) {
         property.innerHTML = '';
     }
-    var child = document.getElementById(identificator);
+    var child = document.querySelector('.active');
     var parent = document.getElementById('itemlist');
     parent.removeChild(child);
 }
@@ -46,17 +35,22 @@ function deleteContact(identificator) {
 
 function validateForm() {
     var info = document.querySelectorAll('input');
-    let contact = new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
-    addContact(contact);
-    for (let property of info) {
-        property.value = "";
+    if (info[0].value == "") {
+        info[0].style.backgroundColor = 'pink';
+    }
+    else {
+        let contact = new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
+        addContact(contact);
+        for (let property of info) {
+            property.value = "";
+        }
+        info[0].style.backgroundColor = 'initial';
     }
 }
 
 addContact(new Person('John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
 addContact(new Person('Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
-addContact(new Person('John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
-addContact(new Person('Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
+addContact(new Person('August', 'Rush', 'augustrush@gmail.com', '55555555', 'Dominos', 'Delivery'));
 
 document.querySelector('#open-modal').addEventListener('click', function () {
     document.querySelector('#modal-container').style.display = 'block';
@@ -68,5 +62,7 @@ document.querySelector('#close-modal').addEventListener('click', function () {
 document.querySelector('#close-modal').addEventListener('click', function () {
     document.querySelector('#modal-container').style.display = 'none';
 });
+
+document.querySelector('#delete').addEventListener('click', deleteCurrentContact);
 
 document.querySelector('.submit-button').addEventListener('click', validateForm);
