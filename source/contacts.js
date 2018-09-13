@@ -2,8 +2,8 @@ var id = 0;
 var contacts = [];
 var info = document.querySelectorAll('input');
 
-function Person(firstName, lastName, email, phone, organisation, jobTitle) {
-    this.id = id++;
+function Person(id, firstName, lastName, email, phone, organisation, jobTitle) {
+    this.id = id
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -25,6 +25,7 @@ function addContact(person) {
 
 function editContact(person, id) {
     contacts[id] = person;
+    contacts[id].id = id;
     let li = document.getElementById(id);
     li.innerHTML = person.firstName + ' ' + person.lastName;
     createTabContent(person);
@@ -55,13 +56,7 @@ function openTab(target) {
     }
     target.className += ' active';
     var targetId = target.getAttribute('id');
-    for (let person of contacts) {
-
-        if (person.id == targetId) {
-            createTabContent(person);
-            break;
-        }
-    }
+    createTabContent(contacts[targetId]);
 }
 
 function createTabContent(person) {
@@ -89,8 +84,4 @@ function clearForm() {
         info[i].value = "";
         info[i].style.backgroundColor = "initial";
     }
-}
-
-function getPersonFromForm() {
-    return new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
 }

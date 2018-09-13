@@ -25,24 +25,26 @@ document.querySelector('#edit').addEventListener('click', function () {
 });
 
 document.querySelector('#delete').addEventListener('click', function () {
-    let id = getActiveId();
+    let activeId = getActiveId();
     if (id) {
-        deleteContact(id);
+        deleteContact(activeId);
     }
 });
 
 document.querySelector('#add-confirm').addEventListener('click', function () {
     if (validateForm()) {
-        addContact(getPersonFromForm());
+        let parsedForm = new Person(id++, info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
+        addContact(parsedForm);
         clearForm();
         closeForm();
     }
 });
 
 document.querySelector('#edit-confirm').addEventListener('click', function () {
-    let id = getActiveId();
-    if (validateForm() && id) {
-        editContact(getPersonFromForm(), id);
+    let activeId = getActiveId();
+    let parsedForm = new Person(id, info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
+    if (validateForm() && activeId) {
+        editContact(parsedForm, activeId);
         clearForm();
         closeForm();
     }
