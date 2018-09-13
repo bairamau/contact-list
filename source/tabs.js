@@ -55,6 +55,6 @@ document.querySelector('#close-modal').addEventListener('click', function () {
     clearForm();
 });
 
-addContact(new Person('John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
-addContact(new Person('Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
-addContact(new Person('August', 'Rush', 'augustrush@gmail.com', '55555555', 'Dominos', 'Delivery'));
+addContact(new Person(id++, 'John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
+addContact(new Person(id++, 'Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
+addContact(new Person(id++, 'August', 'Rush', 'augustrush@gmail.com', '55555555', 'Dominos', 'Delivery'));
