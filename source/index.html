@@ -24,8 +24,9 @@
             <div class='name-value-container'><span class='name'>Job title</span><span class='value' id='jobTitle'></span></div>
         </div>
         <div id='controls'>
-            <button class='control-button' id='open-modal' title="Add new contact">+</button>
-            <button class='control-button' id='delete' title="Delete current contact">D</button>
+            <button class='control-button' id='delete' title="Delete current contact">×</button>
+            <button class='control-button' id='edit' title="Edit current contact">E</button>
+            <button class='control-button' id='add' title="Add new contact">+</button>  
         </div>
     </div>
     <div id='modal-container' class='modal'>
@@ -43,7 +44,8 @@
             <input type='text' id='organisation-input' name='organisation'>
             <label for='jobTitle-input'>Job title</label>
             <input type='text' id='jobTitle-input' name='jobTitle'>
-            <button class='submit-button'>Add</button>
+            <button id='add-confirm' class='submit-button'>Add</button>
+            <button id='edit-confirm' class='submit-button'>Confirm editing</button>
         </div>
     <div id='form-modal' class='modal'></div>
     

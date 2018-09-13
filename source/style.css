@@ -34,11 +34,6 @@ ul.click-tabs {
     overflow: auto;
 }
 
-ul li.tab {
-    padding: 20px;
-    position:relative;
-}
-
 ul li:nth-child(odd) {
     background: #f9f9f9;
 }
@@ -53,6 +48,10 @@ ul li.active {
     color: #fff;
 }
 
+ul li.tab {
+    padding: 20px;
+    position:relative;
+}
 
 #tab-content {
     font-size: 1.2em;
@@ -71,6 +70,7 @@ ul li.active {
     flex-flow:column;
     justify-content: space-around;
     align-items:center;
+    background-color: #f1f1f1;
 }
 
 input {
@@ -84,7 +84,7 @@ input {
 
 input:focus {
     border: 2px solid dodgerblue;
-  }
+}
 
 button {
     background-color: dodgerblue;
@@ -97,13 +97,14 @@ button {
 button:hover{
     opacity: 1;
 }
+
 button.submit-button {
     width:100%;
     margin-top: 20px;
     padding: 15px 20px;
 }
 
-.control-button {
+button.control-button {
     border-radius: 50%;
     width:70px;
     height:70px;
