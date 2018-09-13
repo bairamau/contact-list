@@ -1,5 +1,6 @@
 var id = 0;
 var contacts = [];
+var info = document.querySelectorAll('input');
 
 function Person(firstName, lastName, email, phone, organisation, jobTitle) {
     this.id = id++;
@@ -11,58 +12,85 @@ function Person(firstName, lastName, email, phone, organisation, jobTitle) {
     this.jobTitle = jobTitle;
 }
 
-function addContact(contact) {
-    contacts.push(contact);
-    var parent = document.querySelector('#itemlist');
-    var li = document.createElement('li');
-    var node = document.createTextNode(contact.firstName + ' ' + contact.lastName);
+function addContact(person) {
+    contacts.push(person);
+    let parent = document.querySelector('#itemlist');
+    let li = document.createElement('li');
+    let node = document.createTextNode(person.firstName + ' ' + person.lastName);
     li.appendChild(node);
-    li.setAttribute('id', contact.id);
+    li.setAttribute('id', person.id);
     li.setAttribute('class', 'tab');
     parent.appendChild(li);
 }
 
-function deleteCurrentContact() {
+function editContact(person, id) {
+    contacts[id] = person;
+    let li = document.getElementById(id);
+    li.innerHTML = person.firstName + ' ' + person.lastName;
+    createTabContent(person);
+}
+
+function deleteContact(id) {
     properties = document.querySelectorAll('.value');
-    for (property of properties) {
+    for (let property of properties) {
         property.innerHTML = '';
     }
-    var child = document.querySelector('.active');
-    var parent = document.getElementById('itemlist');
+    let child = document.getElementById(id);
+    let parent = document.getElementById('itemlist');
     parent.removeChild(child);
 }
 
-
 function validateForm() {
-    var info = document.querySelectorAll('input');
     if (info[0].value == "") {
         info[0].style.backgroundColor = 'pink';
+        return false;
     }
-    else {
-        let contact = new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
-        addContact(contact);
-        for (let property of info) {
-            property.value = "";
+    return true;
+}
+
+function openTab(target) {
+    var tabs = document.getElementsByClassName("tab");
+    for (i = 0; i < tabs.length; i++) {
+        tabs[i].className = tabs[i].className.replace(" active", "");
+    }
+    target.className += ' active';
+    var targetId = target.getAttribute('id');
+    for (let person of contacts) {
+
+        if (person.id == targetId) {
+            createTabContent(person);
+            break;
         }
-        info[0].style.backgroundColor = 'initial';
     }
 }
 
-addContact(new Person('John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
-addContact(new Person('Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
-addContact(new Person('August', 'Rush', 'augustrush@gmail.com', '55555555', 'Dominos', 'Delivery'));
+function createTabContent(person) {
+    document.querySelector('#firstName').innerHTML = person.firstName;
+    document.querySelector('#lastName').innerHTML = person.lastName;
+    document.querySelector('#email').innerHTML = person.email;
+    document.querySelector('#phone').innerHTML = person.phone;
+    document.querySelector('#organisation').innerHTML = person.organisation;
+    document.querySelector('#jobTitle').innerHTML = person.jobTitle;
+}
 
-document.querySelector('#open-modal').addEventListener('click', function () {
-    document.querySelector('#modal-container').style.display = 'block';
-});
-document.querySelector('#close-modal').addEventListener('click', function () {
+function getActiveId() {
+    let element = document.querySelector('.active');
+    if (element) {
+        return element.getAttribute('id');
+    }
+}
+
+function closeForm() {
     document.querySelector('#modal-container').style.display = 'none';
-});
+}
 
-document.querySelector('#close-modal').addEventListener('click', function () {
-    document.querySelector('#modal-container').style.display = 'none';
-});
+function clearForm() {
+    for (let i = 0; i < info.length; ++i) {
+        info[i].value = "";
+        info[i].style.backgroundColor = "initial";
+    }
+}
 
-document.querySelector('#delete').addEventListener('click', deleteCurrentContact);
-
-document.querySelector('.submit-button').addEventListener('click', validateForm);
+function getPersonFromForm() {
+    return new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
+}
