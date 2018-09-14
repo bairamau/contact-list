@@ -11,22 +11,24 @@ document.querySelector('#add').addEventListener('click', function () {
 });
 
 document.querySelector('#edit').addEventListener('click', function () {
-    let id = getActiveId();
-    info[0].value = contacts[id].firstName;
-    info[1].value = contacts[id].lastName;
-    info[2].value = contacts[id].email;
-    info[3].value = contacts[id].phone;
-    info[4].value = contacts[id].organisation;
-    info[5].value = contacts[id].jobTitle;
-    document.querySelector('#edit-confirm').style.display = 'initial';
-    document.querySelector('#add-confirm').style.display = 'none';
-    document.querySelector('#modal-container').style.display = 'block';
+    let activeId = getActiveId();
+    if (activeId) {
+        info[0].value = contacts[activeId].firstName;
+        info[1].value = contacts[activeId].lastName;
+        info[2].value = contacts[activeId].email;
+        info[3].value = contacts[activeId].phone;
+        info[4].value = contacts[activeId].organisation;
+        info[5].value = contacts[activeId].jobTitle;
+        document.querySelector('#edit-confirm').style.display = 'initial';
+        document.querySelector('#add-confirm').style.display = 'none';
+        document.querySelector('#modal-container').style.display = 'block';
+    }
 
 });
 
 document.querySelector('#delete').addEventListener('click', function () {
     let activeId = getActiveId();
-    if (id) {
+    if (activeId) {
         deleteContact(activeId);
     }
 });
@@ -43,7 +45,7 @@ document.querySelector('#add-confirm').addEventListener('click', function () {
 document.querySelector('#edit-confirm').addEventListener('click', function () {
     let activeId = getActiveId();
     let parsedForm = new Person(id, info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
-    if (validateForm() && activeId) {
+    if (validateForm()) {
         editContact(parsedForm, activeId);
         clearForm();
         closeForm();
