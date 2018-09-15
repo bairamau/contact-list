@@ -2,13 +2,13 @@ var id = 0;
 var contacts = [];
 var info = document.querySelectorAll('input');
 
-function Person(id, firstName, lastName, email, phone, organisation, jobTitle) {
+function Person(id, firstName, lastName, email, phone, company, jobTitle) {
     this.id = id
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phone = phone;
-    this.organisation = organisation;
+    this.company = company;
     this.jobTitle = jobTitle;
 }
 
@@ -43,7 +43,6 @@ function deleteContact(id) {
 
 function validateForm() {
     if (info[0].value == "") {
-        info[0].style.backgroundColor = 'pink';
         return false;
     }
     return true;
@@ -55,8 +54,6 @@ function openTab(target) {
         tabs[i].className = tabs[i].className.replace(" active", "");
     }
     target.className += ' active';
-    var targetId = target.getAttribute('id');
-    createTabContent(contacts[targetId]);
 }
 
 function createTabContent(person) {
@@ -64,7 +61,7 @@ function createTabContent(person) {
     document.querySelector('#lastName').innerHTML = person.lastName;
     document.querySelector('#email').innerHTML = person.email;
     document.querySelector('#phone').innerHTML = person.phone;
-    document.querySelector('#organisation').innerHTML = person.organisation;
+    document.querySelector('#company').innerHTML = person.company;
     document.querySelector('#jobTitle').innerHTML = person.jobTitle;
 }
 
@@ -76,7 +73,7 @@ function getActiveId() {
 }
 
 function closeForm() {
-    document.querySelector('#modal-container').style.display = 'none';
+    document.querySelector('#form-container').style.display = 'none';
 }
 
 function clearForm() {

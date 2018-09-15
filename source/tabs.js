@@ -1,6 +1,8 @@
 document.querySelector('#itemlist').addEventListener('click', function (event) {
     if (event.target.classList.contains('tab')) {
         openTab(event.target);
+        let targetId = event.target.getAttribute('id');
+        createTabContent(contacts[targetId]);
         document.querySelector('#edit').removeAttribute('disabled');
         document.querySelector('#delete').removeAttribute('disabled');
     }
@@ -9,8 +11,16 @@ document.querySelector('#itemlist').addEventListener('click', function (event) {
 document.querySelector('#add').addEventListener('click', function () {
     document.querySelector('#edit-confirm').style.display = 'none';
     document.querySelector('#add-confirm').style.display = 'initial';
-    document.querySelector('#modal-container').style.display = 'block';
+    document.querySelector('#form-container').style.display = 'flex';
 });
+
+document.querySelector('#delete').addEventListener('click', function () {
+    document.querySelector('#confirm-box-container').style.display = 'flex';
+    let activeId = getActiveId();
+    let firstName = contacts[activeId].firstName;
+    let lastName = contacts[activeId].lastName;
+    document.querySelector('#delete-name').innerHTML = firstName + ' ' + lastName;
+})
 
 document.querySelector('#edit').addEventListener('click', function () {
     let activeId = getActiveId();
@@ -19,22 +29,13 @@ document.querySelector('#edit').addEventListener('click', function () {
         info[1].value = contacts[activeId].lastName;
         info[2].value = contacts[activeId].email;
         info[3].value = contacts[activeId].phone;
-        info[4].value = contacts[activeId].organisation;
+        info[4].value = contacts[activeId].company;
         info[5].value = contacts[activeId].jobTitle;
         document.querySelector('#edit-confirm').style.display = 'initial';
         document.querySelector('#add-confirm').style.display = 'none';
-        document.querySelector('#modal-container').style.display = 'block';
+        document.querySelector('#form-container').style.display = 'flex';
     }
 
-});
-
-document.querySelector('#delete').addEventListener('click', function () {
-    let activeId = getActiveId();
-    if (activeId) {
-        deleteContact(activeId);
-        document.querySelector('#edit').setAttribute('disabled', 'disabled');
-        document.querySelector('#delete').setAttribute('disabled', 'disabled');
-    }
 });
 
 document.querySelector('#add-confirm').addEventListener('click', function () {
@@ -44,6 +45,20 @@ document.querySelector('#add-confirm').addEventListener('click', function () {
         clearForm();
         closeForm();
     }
+});
+
+document.querySelector('#delete-confirm').addEventListener('click', function () {
+    let activeId = getActiveId();
+    if (activeId) {
+        deleteContact(activeId);
+        document.querySelector('#edit').setAttribute('disabled', 'disabled');
+        document.querySelector('#delete').setAttribute('disabled', 'disabled');
+        document.querySelector('#confirm-box-container').style.display = 'none';
+    }
+});
+
+document.querySelector('#delete-cancel').addEventListener('click', function () {
+    document.querySelector('#confirm-box-container').style.display = 'none';
 });
 
 document.querySelector('#edit-confirm').addEventListener('click', function () {
@@ -56,7 +71,7 @@ document.querySelector('#edit-confirm').addEventListener('click', function () {
     }
 });
 
-document.querySelector('#close-modal').addEventListener('click', function () {
+document.querySelector('#close-form').addEventListener('click', function () {
     closeForm();
     clearForm();
 });
