@@ -1,6 +1,8 @@
 document.querySelector('#itemlist').addEventListener('click', function (event) {
     if (event.target.classList.contains('tab')) {
         openTab(event.target);
+        document.querySelector('#edit').removeAttribute('disabled');
+        document.querySelector('#delete').removeAttribute('disabled');
     }
 });
 
@@ -30,6 +32,8 @@ document.querySelector('#delete').addEventListener('click', function () {
     let activeId = getActiveId();
     if (activeId) {
         deleteContact(activeId);
+        document.querySelector('#edit').setAttribute('disabled', 'disabled');
+        document.querySelector('#delete').setAttribute('disabled', 'disabled');
     }
 });
 
