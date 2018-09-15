@@ -4,6 +4,9 @@ body, h1, ul, p {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    width:75%;
+    margin:auto;
+    background-color: black;
 }
 
 header h1{
@@ -86,6 +89,10 @@ input:focus {
     border: 2px solid dodgerblue;
 }
 
+input:invalid {
+    background-color: lightpink;
+}
+
 button {
     background-color: dodgerblue;
     color: white;
@@ -94,8 +101,14 @@ button {
     opacity: 0.8;
 }
 
-button:hover{
+button:hover:enabled{
     opacity: 1;
+}
+
+button:disabled{
+    background-color:#000;
+    color: #c0c0c0;
+    cursor: default;
 }
 
 button.submit-button {
@@ -162,7 +175,14 @@ button.control-button {
     padding-bottom: 10px;
 }
 
+.animate {
+    animation: animateScaling 0.6s;
+}
+
 @media all and (max-width:700px) {
+    body {
+        width:100%;
+    }
     .columns-container {
         height: auto;    
         flex-direction: column;
@@ -175,11 +195,7 @@ button.control-button {
     }
 }
 
-.animate {
-    animation: animatezoom 0.6s
-}
-
-@keyframes animatezoom {
+@keyframes animateScaling {
     from {transform: scale(0)} 
     to {transform: scale(1)}
 }
