@@ -94,6 +94,7 @@ input:invalid {
 }
 
 button {
+    display:inline-block;
     background-color: dodgerblue;
     color: white;
     border: none;
@@ -127,6 +128,8 @@ button.control-button {
 
 .modal {
     display:none;
+    justify-content: center;
+    align-items: center;
     position:fixed;
     z-index:1;
     left:0px;
@@ -142,8 +145,7 @@ button.control-button {
     position:relative;
     background-color: #fefefe;
     padding: 20px;
-    width:50%;
-    margin:5% auto 5% auto;
+    max-width: 50%;
 }
 
 .close {
@@ -175,6 +177,12 @@ button.control-button {
     padding-bottom: 10px;
 }
 
+.question {
+    font-weight: bold;
+    padding-bottom: 20px;
+    
+}
+
 .animate {
     animation: animateScaling 0.6s;
 }
@@ -188,9 +196,9 @@ button.control-button {
         flex-direction: column;
     }
     .modal-content {
-        width:80%;
+        max-width:80%;
     }
-    #controls{
+    #controls {
         flex-direction:row;
     }
 }
