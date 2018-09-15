@@ -21,7 +21,7 @@
             <div class='name-value-container'><span class='name'>Last name</span><span class='value' id='lastName'></span></div>
             <div class='name-value-container'><span class='name'>Email</span><span class='value' id='email'></span></div>
             <div class='name-value-container'><span class='name'>Phone</span><span class='value' id='phone'></span></div>
-            <div class='name-value-container'><span class='name'>Organisation</span><span class='value' id='organisation'></span></div>
+            <div class='name-value-container'><span class='name'>Company</span><span class='value' id='company'></span></div>
             <div class='name-value-container'><span class='name'>Job title</span><span class='value' id='jobTitle'></span></div>
         </div>
         <div id='controls'>
@@ -30,9 +30,9 @@
             <button class='control-button' id='edit' title="Edit current contact" disabled='disabled'><i class="fa fa-edit"></i></button>
         </div>
     </div>
-    <div id='modal-container' class='modal'>
+    <div id='form-container' class='modal'>
         <div class='modal-content animate'>
-            <span id='close-modal' class='close' title='Close modal'>×</span>
+            <span id='close-form' class='close' title='Close form'>×</span>
             <label for='firstName-input'>First name</label>
             <input type='text' id='firstName-input' name='firstName' required pattern='[A-Za-z]+'>
             <label for='lastName-input' pattern='[A-Za-z]+'>Last name</label>
@@ -41,15 +41,28 @@
             <input type='email' id='email-input' name='email'>
             <label for='phone-input'>Phone</label>
             <input required type='tel' id='phone-input' name='phone' required>
-            <label for='organisation-input'>Organisation</label>
-            <input type='text' id='organisation-input' name='organisation'>
+            <label for='company-input'></label>Company</label>
+            <input type='text' id='company-input' name='company'>
             <label for='jobTitle-input'>Job title</label>
             <input type='text' id='jobTitle-input' name='jobTitle'>
             <button id='add-confirm' class='submit-button'>Add</button>
             <button id='edit-confirm' class='submit-button'>Confirm editing</button>
         </div>
-        <script src='contacts.js'></script>
-        <script src='tabs.js'></script>
+    </div>
+    <div id='confirm-box-container' class='modal'>
+        <div class='modal-content animate'>
+            <div class='question'>
+                Delete this contact?
+            </div>
+            <div class='description'><span id='delete-name'></span>
+                will be removed from contact list
+            </div>
+            <button id='delete-cancel' class='submit-button'>Cancel</button>
+            <button id='delete-confirm' class='submit-button'>Delete</button>
+        </div>
+    </div>
+    <script src='contacts.js'></script>
+    <script src='tabs.js'></script>
 
 </body>
 
