@@ -79,6 +79,5 @@ function closeForm() {
 function clearForm() {
     for (let i = 0; i < info.length; ++i) {
         info[i].value = "";
-        info[i].style.backgroundColor = "initial";
     }
 }
