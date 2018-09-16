@@ -1,10 +1,14 @@
-body, h1, ul, p {
+h1, ul, p {
     margin:0px;
 }
 
 body {
+    display:flex;
+    flex-direction:column;
+    height:100vh;
     font-family: Arial, Helvetica, sans-serif;
-    width:75%;
+    max-width:75%;
+    min-width:600px;
     margin:auto;
     background-color: black;
 }
@@ -22,9 +26,9 @@ label {
 }
 
 .columns-container {
-    height: calc(100vh - 36.6px);
+    flex:1;
     display: flex;
-    flex-flow: row;
+    flex-direction: row;
 }
 
 ul.click-tabs {
@@ -32,7 +36,7 @@ ul.click-tabs {
     padding:0px;
     list-style-type: none;
     list-style-position: inside;
-    flex: 30%;
+    flex:3;
     background-color: #f1f1f1;
     overflow: auto;
 }
@@ -57,20 +61,21 @@ ul li.tab {
 }
 
 #tab-content {
-    font-size: 1.2em;
+    box-sizing: border-box;
     display:flex;
-    flex-flow: column;
+    flex-direction: column;
     justify-content: space-around; 
-    flex: 60%;
+    flex:6;
     padding: 40px 20px 40px 20px;
+    font-size: 1.2em;
     background-color:white;
     overflow: auto;
 }
 
 #controls {
     display:flex;
-    flex:10%;
-    flex-flow:column;
+    flex-direction:column;
+    flex:1;
     justify-content: space-around;
     align-items:center;
     background-color: #f1f1f1;
@@ -120,6 +125,7 @@ button.submit-button {
 }
 
 button.control-button {
+    padding:0px;
     border-radius: 50%;
     width:60px;
     height:60px;
@@ -146,7 +152,8 @@ button.control-button {
     position:relative;
     background-color: #fefefe;
     padding: 20px;
-    max-width: 50%;
+    max-width: 40%;
+    min-width: 500px;
 }
 
 .close {
@@ -190,26 +197,37 @@ button.control-button {
 }
 
 .box-controls button{
-    width:initial;
+    width:35%;
 }
 
 .animate {
-    animation: animateScaling 0.6s;
+    animation: animateScaling 0.5s;
 }
 
-@media all and (max-width:700px) {
+@media all and (max-width:600px) {
     body {
-        width:100%;
+        max-width:none;
+        min-width:0;
     }
     .columns-container {
-        height: auto;    
         flex-direction: column;
     }
     .modal-content {
-        max-width:80%;
+        max-width:none;
+        min-width:0;
+        width:100%;
+        border-radius:0;
     }
     #controls {
+        flex:2;
         flex-direction:row;
+        align-items:stretch;
+    }
+
+    button.control-button {
+        flex:1;
+        border-radius: 0;
+        height:auto;
     }
 }
 
