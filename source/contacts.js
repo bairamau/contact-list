@@ -42,10 +42,7 @@ function deleteContact(id) {
 }
 
 function validateForm() {
-    if (info[0].value == "") {
-        return false;
-    }
-    return true;
+    return document.querySelector('form').reportValidity();
 }
 
 function openTab(target) {
