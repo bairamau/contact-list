@@ -1,9 +1,42 @@
 var id = 0;
-var contacts = [];
+var contacts = {};
 var info = document.querySelectorAll('input');
 
-function Person(id, firstName, lastName, email, phone, company, jobTitle) {
-    this.id = id
+function initStorage() {
+    if (localStorage.length == 0) {
+        addContact(new Person('John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
+        addContact(new Person('Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
+        addContact(new Person('August', 'Rush', 'augustrush@gmail.com', '55555555', 'Dominos', 'Delivery'));
+    }
+    else {
+        recoverData();
+    }
+}
+
+function recoverData() {
+    id = localStorage['id'];
+    contacts = JSON.parse(localStorage['contacts']);
+    for(let key in contacts){
+        renderContact(key);
+    }
+}
+
+function updateLocalStorage() {
+    localStorage['contacts'] = JSON.stringify(contacts);
+    localStorage['id'] = id;
+}
+
+function renderContact(id) {
+    let parent = document.querySelector('#itemlist');
+    let li = document.createElement('li');
+    let text = document.createTextNode(contacts[id].firstName + ' ' + contacts[id].lastName);
+    li.appendChild(text);
+    li.setAttribute('id', id);
+    li.setAttribute('class', 'tab');
+    parent.appendChild(li);
+}
+
+function Person(firstName, lastName, email, phone, company, jobTitle) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -13,32 +46,37 @@ function Person(id, firstName, lastName, email, phone, company, jobTitle) {
 }
 
 function addContact(person) {
-    contacts.push(person);
-    let parent = document.querySelector('#itemlist');
-    let li = document.createElement('li');
-    let node = document.createTextNode(person.firstName + ' ' + person.lastName);
-    li.appendChild(node);
-    li.setAttribute('id', person.id);
-    li.setAttribute('class', 'tab');
-    parent.appendChild(li);
+    contacts[id] = person;
+    updateLocalStorage();
+    renderContact(id++);
 }
 
 function editContact(person, id) {
     contacts[id] = person;
-    contacts[id].id = id;
     let li = document.getElementById(id);
     li.innerHTML = person.firstName + ' ' + person.lastName;
-    createTabContent(person);
+    updateLocalStorage();
+    createTabContent(id);
 }
 
 function deleteContact(id) {
+    removeTab(id);
+    delete contacts[id];
+    updateLocalStorage();
+    clearTabContent();
+}
+
+function removeTab(id) {
+    let child = document.getElementById(id);
+    let parent = document.getElementById('itemlist');
+    parent.removeChild(child);
+}
+
+function clearTabContent() {
     properties = document.querySelectorAll('.value');
     for (let property of properties) {
         property.innerHTML = '';
     }
-    let child = document.getElementById(id);
-    let parent = document.getElementById('itemlist');
-    parent.removeChild(child);
 }
 
 function validateForm() {
@@ -53,13 +91,13 @@ function openTab(target) {
     target.className += ' active';
 }
 
-function createTabContent(person) {
-    document.querySelector('#firstName').innerHTML = person.firstName;
-    document.querySelector('#lastName').innerHTML = person.lastName;
-    document.querySelector('#email').innerHTML = person.email;
-    document.querySelector('#phone').innerHTML = person.phone;
-    document.querySelector('#company').innerHTML = person.company;
-    document.querySelector('#jobTitle').innerHTML = person.jobTitle;
+function createTabContent(id) {
+    document.querySelector('#firstName').innerHTML = contacts[id].firstName;
+    document.querySelector('#lastName').innerHTML = contacts[id].lastName;
+    document.querySelector('#email').innerHTML = contacts[id].email;
+    document.querySelector('#phone').innerHTML = contacts[id].phone;
+    document.querySelector('#company').innerHTML = contacts[id].company;
+    document.querySelector('#jobTitle').innerHTML = contacts[id].jobTitle;
 }
 
 function getActiveId() {

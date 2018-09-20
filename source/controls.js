@@ -2,7 +2,7 @@ document.querySelector('#itemlist').addEventListener('click', function (event) {
     if (event.target.classList.contains('tab')) {
         openTab(event.target);
         let targetId = event.target.getAttribute('id');
-        createTabContent(contacts[targetId]);
+        createTabContent(targetId);
         document.querySelector('#edit').removeAttribute('disabled');
         document.querySelector('#delete').removeAttribute('disabled');
     }
@@ -40,7 +40,7 @@ document.querySelector('#edit').addEventListener('click', function () {
 
 document.querySelector('#add-confirm').addEventListener('click', function () {
     if (validateForm()) {
-        let parsedForm = new Person(id++, info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
+        let parsedForm = new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
         addContact(parsedForm);
         clearForm();
         closeForm();
@@ -63,7 +63,7 @@ document.querySelector('#delete-cancel').addEventListener('click', function () {
 
 document.querySelector('#edit-confirm').addEventListener('click', function () {
     let activeId = getActiveId();
-    let parsedForm = new Person(id, info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
+    let parsedForm = new Person(info[0].value, info[1].value, info[2].value, info[3].value, info[4].value, info[5].value);
     if (validateForm()) {
         editContact(parsedForm, activeId);
         clearForm();
@@ -76,6 +76,4 @@ document.querySelector('#close-form').addEventListener('click', function () {
     clearForm();
 });
 
-addContact(new Person(id++, 'John', 'Smith', 'johnsmith@example.com', '12345678', 'smith inc.', 'CEO'));
-addContact(new Person(id++, 'Ayy', 'Lamar', 'ayy@lamar.xyz', '63350541', '', ''));
-addContact(new Person(id++, 'August', 'Rush', 'augustrush@gmail.com', '55555555', 'Dominos', 'Delivery'));
+initStorage();
