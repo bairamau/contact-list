@@ -92,6 +92,7 @@ input {
 
 input:focus {
     border: 2px solid dodgerblue;
+    outline:none;
 }
 
 input:invalid {
