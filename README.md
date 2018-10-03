@@ -1,1 +1,1 @@
-:C
+https://bairamau.github.io/contact-list/
